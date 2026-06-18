@@ -139,7 +139,7 @@ export const getOrderById = async (
   res: Response,
 ): Promise<void> => {
   try {
-    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+    if (!mongoose.Types.ObjectId.isValid(req.params.id as string)) {
       res.status(400).json({ message: "Invalid order ID" });
       return;
     }

@@ -63,14 +63,14 @@ export const getProductByCategory = async (
 ): Promise<void> => {
   try {
     const validCategories = ["headphones", "speaker", "earphones"];
-    const category = req.params.category.toLowerCase();
+    const category = (req.params.category as string).toLocaleLowerCase();
 
     if (!validCategories.includes(category)) {
       res.status(400).json({ message: "Invalid category" });
       return;
     }
 
-    const products = await Product.find({ category }).sort({ createdAt: -1 });
+    const products = await Product.find({ category:category as "headphones" | "headphones" | "earphones"}).sort({ createdAt: -1 });
     res.status(200).json(products);
   } catch (error) {
     res.status(500).json({ message: "Server error products by category" });
@@ -128,12 +128,12 @@ export const updateProduct = async (
   res: Response,
 ): Promise<void> => {
   try {
-    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+    if (!mongoose.Types.ObjectId.isValid(req.params.id as string)) {
       res.status(400).json({ message: "Invalid product ID" });
       return;
     }
 
-    const product = await Product.findById(req.params.id);
+    const product = await Product.findById(req.params.id as string);
 
     if (!product) {
       res.status(404).json({ message: "Product not found" });
@@ -170,7 +170,7 @@ export const deleteProduct = async (
   res: Response,
 ): Promise<void> => {
   try {
-    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+    if (!mongoose.Types.ObjectId.isValid(req.params.id as string)) {
       res.status(400).json({ message: "Invalid product ID" });
       return;
     }

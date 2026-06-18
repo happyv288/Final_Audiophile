@@ -4,7 +4,7 @@
 import mongoose, { Schema } from "mongoose";
 import { IProduct } from "../types/indexServer";
 
-const productSchema = new Schema<IProduct>(
+const productSchema = new Schema(
   {
     name: {
       type: String,
@@ -58,7 +58,7 @@ const productSchema = new Schema<IProduct>(
     gallery: [{ type: String }],
 
     // Whether to show the "N product" badge on the product
-    isNew: {
+    isNewArrival: {
       type: Boolean,
       default: false,
     },

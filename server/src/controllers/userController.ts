@@ -13,7 +13,7 @@
 import { Request, Response } from "express";
 import User from "../models/User";
 import jwt from "jsonwebtoken";
-import { AuthReqest } from "../types/indexServer";
+import { AuthRequest } from "../types/indexServer";
 import { deleteImage, uploadImage } from "../config/cloudinary";
 
 const generateToken = (id: string): string => {
@@ -106,7 +106,7 @@ export const login = async (req: Request, res: Response): Promise<void> => {
 // Returns the logged-in users profile (require token)
 
 export const getProfile = async (
-  req: AuthReqest,
+  req: AuthRequest,
   res: Response,
 ): Promise<void> => {
   try {
@@ -127,7 +127,7 @@ export const getProfile = async (
 // Put /api/auth/profile
 // Updates users name, profile or address
 export const updateProfile = async (
-  req: AuthReqest,
+  req: AuthRequest,
   res: Response,
 ): Promise<void> => {
   try {
@@ -177,7 +177,7 @@ export const updateProfile = async (
 // POST /api/auth /avatar
 // Upload a new profile picture to cloudinary
 export const updateAvatar = async (
-  req: AuthReqest,
+  req: AuthRequest,
   res: Response,
 ): Promise<void> => {
   try {
@@ -219,7 +219,7 @@ export const updateAvatar = async (
 // GET /api/admin/users
 // Returns all users (admin only)
 export const getAllUsers = async (
-  req: AuthReqest,
+  req: AuthRequest,
   res: Response,
 ): Promise<void> => {
   try {
@@ -238,7 +238,7 @@ export const getAllUsers = async (
 // toggle admin status or update user info (admin only)
 
 export const updateUserRole = async (
-  req: AuthReqest,
+  req: AuthRequest,
   res: Response,
 ): Promise<void> => {
   try {
@@ -268,7 +268,7 @@ export const updateUserRole = async (
 // DELETE /api/admin/users/:id
 // permanently remove a user (admin only)
 export const deleteUser = async (
-  req: AuthReqest,
+  req: AuthRequest,
   res: Response,
 ): Promise<void> => {
   try {
