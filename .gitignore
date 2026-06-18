@@ -1,0 +1,36 @@
+# Despendencies 
+node_modules/
+client/node_modules/
+server/node_modules/
+
+# Environment files - NEVER commit these
+.env
+Client/.env
+server/.env
+
+# Build outputs
+dist/
+client/dist/
+server/dist/
+build/
+
+#vite cache
+.vite/
+client/vite/
+
+# TypeScript build info
+*. tsbuildinfo
+
+#macOS
+.DS_store
+
+# Editor
+.vscode/
+.idea/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Test coverge/
+coverage/ 
