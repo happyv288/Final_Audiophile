@@ -3,8 +3,8 @@
 // "protect" check if the logged-in user in an admin
 
 import { NextFunction, Response } from "express";
-import  Jwt from "jsonwebtoken";
-import { AuthReqest, IJwtPayload } from "../types/indexServer";
+import Jwt from "jsonwebtoken";
+import { AuthRequest, IJwtPayload } from "../types/indexServer";
 import User from "../models/User";
 
 // These middleware functions act like security guards:
@@ -16,7 +16,7 @@ import User from "../models/User";
 // Format: "Authorization: Bearer eyjh55udstfytcjtvkyctcj"
 
 export const protect = async (
-  req: AuthReqest,
+  req: AuthRequest,
   res: Response,
   next: NextFunction,
 ): Promise<void> => {
@@ -70,7 +70,7 @@ export const protect = async (
 // Must be used after "protect" - it relies on req.user being set
 // check if the logged-in user has admin privileges
 export const admin = (
-  req: AuthReqest,
+  req: AuthRequest,
   res: Response,
   next: NextFunction,
 ): void => {

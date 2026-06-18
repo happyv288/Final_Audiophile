@@ -49,7 +49,7 @@ export interface IProduct extends Document {
   features: string;
   inTheBox: IBoxItem[];
   gallery: string[];
-  isNew: boolean;
+  isNewArrival: boolean;
   createAt: Date;
 }
 
