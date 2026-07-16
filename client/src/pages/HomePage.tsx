@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import Man from "../components/Man";
 import { useStore } from "../context/StoreContext";
 import RollerLoader from "../components/RollerLoader";
-import Cart from "../components/Carts";
+
 
 const cartHeadphone =
   "https://res.cloudinary.com/ddhfphlho/image/upload/v1780583436/cartheadphone_ev5rl6.png";

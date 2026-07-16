@@ -6,9 +6,9 @@ import { IoClose } from "react-icons/io5";
 import { MdChevronRight } from "react-icons/md";
 import { useStore } from "../context/StoreContext";
 import { useAuth } from "../context/AuthContext";
-import { MdKeyboardArrowRight, MdKeyboardArrowDown } from "react-icons/md";
+import { MdKeyboardArrowDown } from "react-icons/md";
 import "../App.css";
-import { FiUser, FiSettings, FiLogOut, FiShoppingBag } from "react-icons/fi";
+import { FiSettings, FiLogOut, FiShoppingBag } from "react-icons/fi";
 import { MdDashboard } from "react-icons/md";
 
 const navlogo =
