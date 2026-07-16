@@ -1,31 +1,31 @@
-// Typescript interface that describes the shape of data used throughout the react application
+// TypeScript interface that describes the shape of data used throughtout the React application
 
-// ------------ Product -----
-//   Respresenting a product from API (with mongodb _id)
+// ---------- Product ------------
+// Representing a product from the API (with mongoDB_id)
 
-export interface product {
+export interface Product {
   _id: string;
   name: string;
-  category: "headphone" | "speaker" | "earphone";
+  category: "headphones" | "speakers" | "earphones";
   price: number;
   image: string;
   description: string;
   features: string;
-  inTheBox: BoxItems[];
-  galllery: string[];
+  inTheBox: BoxItem[];
+  gallery: string[];
   isNew: boolean;
   createdAt: string;
 }
 
-// One items included in the product box
-export interface BoxItems {
+// One item included in the product box
+export interface BoxItem {
   quantity: number;
   item: string;
 }
 
-// ---- Cart ----
-// A cart items is a product + a quality
-export interface CartItems extends product {
+//  ---------- Cart ----------
+//  A cart items is a product + a quatity
+export interface CartItem extends Product {
   quantity: number;
 }
 
@@ -34,24 +34,24 @@ export interface CartTotals {
   subtotal: number;
   shipping: number;
   vat: number;
-  grandtotal: number;
+  grandTotal: number;
 }
 
-// ---- Users -----
-// The user object stored in our Authcontext
+// ----- Users -------
+// The user object stored in our AuthContext
 export interface User {
   _id: string;
   name: string;
   email: string;
-  isAdmin: boolean;
+  isAdmin: string;
   avatar?: string;
-  phone?: number;
+  phone?: string;
   address?: string;
   token: string;
 }
 
-// ----- Order -----
-// Billing/shipping info from checkout form
+// ---- Order ------
+// Billing/shipping info from chekout form
 export interface CustomerInfo {
   name: string;
   email: string;
@@ -60,13 +60,12 @@ export interface CustomerInfo {
   zipCode: string;
   city: string;
   country: string;
-  paymentMethod: "e-money" | "Cash on Delivery";
+  paymentMethod: "e-Money" | "Cash on Delivery";
   eMoneyNumber?: string;
-  eMoneyPin?: string;
+  eMoneyPIN?: string;
 }
 
-// An item inside a placed order
-
+// An items inside a placed order
 export interface OrderItem {
   productId: string;
   name: string;
@@ -75,46 +74,46 @@ export interface OrderItem {
   image: string;
 }
 
-// The full order object retured from API
+// The full order Object returned from the API
 export interface Order {
   _id: string;
   orderId: string;
   userId?: string;
-  customerInfo: CustomerInfo[];
+  customerInfo: CustomerInfo;
   cartItems: OrderItem[];
   orderSummary: CartTotals;
-  status: "pending" | "processing" | "delivered" | "cancelled";
+  status: "pending" | "processing" | "shipped" | "delivered" | "cancelled";
   createdAt: string;
 }
 
-//   ------- Checking Form ------
+// ---- Checkout Form --------
 // Form fields for the checkout page
 export interface CheckoutFormData {
   name: string;
   email: string;
-  phone: number;
+  phone: string;
   address: string;
   zipCode: string;
   city: string;
   country: string;
   paymentMethod: "e-Money" | "Cash on Delivery";
   eMoneyNumber: string;
-  eMoneyPin: string;
+  eMoneyPIN: string;
 }
 
-// Form validation errors - same eys as the fom but values are error strings
-export type FormError = Partial<Record<keyof CheckoutFormData, string>>;
+// Form validation errors - same keys as the form, but values are error strings
+export type FormErrors = Partial<Record<keyof CheckoutFormData, string>>;
 
-// ------ Admin Dashboard Stats ----
+// ------- Admin DashBoard stats ---------
 export interface DashboardStats {
   totalOrders: number;
   totalUsers: number;
   totalRevenue: number;
   pendingOrders: number;
-  recentOders: Order[];
+  recentOrders: Order[];
   monthlyRevenue: {
     _id: { year: number; month: number };
     revenue: number;
     count: number;
-  };
+  }[];
 }
