@@ -1,0 +1,2241 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Audiophile Nigeria — Project Case Study</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              brand: "#D87D4A",
+              "brand-light": "#FBAF85",
+              "brand-dark": "#0D0D0D",
+              cream: "#FFF8F2",
+              "slate-custom": "#4A4A5A",
+            },
+            fontFamily: { sans: ["Manrope", "sans-serif"] },
+          },
+        },
+      };
+    </script>
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+        font-family: "Manrope", sans-serif;
+      }
+      body {
+        background: #0d0d0d;
+        color: #f9f6f1;
+        overflow-x: hidden;
+      }
+
+      /* ── Slide sections ── */
+      .slide {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 4rem 6vw;
+        position: relative;
+        overflow: hidden;
+      }
+
+      /* ── Entrance animation ── */
+      .reveal {
+        opacity: 0;
+        transform: translateY(40px);
+        transition:
+          opacity 0.7s ease,
+          transform 0.7s ease;
+      }
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .reveal-delay-1 {
+        transition-delay: 0.1s;
+      }
+      .reveal-delay-2 {
+        transition-delay: 0.2s;
+      }
+      .reveal-delay-3 {
+        transition-delay: 0.35s;
+      }
+      .reveal-delay-4 {
+        transition-delay: 0.5s;
+      }
+      .reveal-delay-5 {
+        transition-delay: 0.65s;
+      }
+
+      /* ── Orange accent line ── */
+      .overline {
+        display: inline-block;
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        color: #d87d4a;
+        margin-bottom: 1.2rem;
+      }
+      .overline::before {
+        content: "";
+        display: inline-block;
+        width: 28px;
+        height: 2px;
+        background: #d87d4a;
+        vertical-align: middle;
+        margin-right: 0.6rem;
+      }
+
+      /* ── Big stat card ── */
+      .stat-card {
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(216, 125, 74, 0.25);
+        border-radius: 16px;
+        padding: 1.8rem 1.5rem;
+        flex: 1;
+        min-width: 0;
+        position: relative;
+        overflow: hidden;
+        transition:
+          border-color 0.3s,
+          transform 0.3s;
+      }
+      .stat-card:hover {
+        border-color: #d87d4a;
+        transform: translateY(-4px);
+      }
+      .stat-card .big {
+        font-size: clamp(2rem, 5vw, 3.5rem);
+        font-weight: 900;
+        color: #d87d4a;
+        line-height: 1;
+      }
+      .stat-card .label {
+        font-size: 0.78rem;
+        font-weight: 600;
+        color: rgba(249, 246, 241, 0.55);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin-top: 0.4rem;
+      }
+      .stat-card .sub {
+        font-size: 0.85rem;
+        font-weight: 500;
+        color: rgba(249, 246, 241, 0.7);
+        margin-top: 0.6rem;
+        line-height: 1.5;
+      }
+
+      /* ── Feature pill ── */
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: rgba(216, 125, 74, 0.12);
+        border: 1px solid rgba(216, 125, 74, 0.3);
+        color: #fbaf85;
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        padding: 0.4rem 1rem;
+        border-radius: 999px;
+      }
+      .pill::before {
+        content: "✓";
+        font-size: 0.7rem;
+      }
+
+      /* ── Tech badge ── */
+      .tech-badge {
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 10px;
+        padding: 0.6rem 1.1rem;
+        font-size: 0.82rem;
+        font-weight: 700;
+        color: rgba(249, 246, 241, 0.85);
+        white-space: nowrap;
+        transition:
+          background 0.25s,
+          border-color 0.25s;
+      }
+      .tech-badge:hover {
+        background: rgba(216, 125, 74, 0.15);
+        border-color: #d87d4a;
+        color: #d87d4a;
+      }
+
+      /* ── Progress nav dots ── */
+      #nav-dots {
+        position: fixed;
+        right: 1.5rem;
+        top: 50%;
+        transform: translateY(-50%);
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+        z-index: 100;
+      }
+      .nav-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: rgba(249, 246, 241, 0.25);
+        cursor: pointer;
+        transition:
+          background 0.3s,
+          transform 0.3s;
+        border: none;
+        outline: none;
+      }
+      .nav-dot.active {
+        background: #d87d4a;
+        transform: scale(1.4);
+      }
+
+      /* ── Slide counter ── */
+      #slide-counter {
+        position: fixed;
+        bottom: 1.5rem;
+        right: 2rem;
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.15em;
+        color: rgba(249, 246, 241, 0.35);
+        z-index: 100;
+      }
+
+      /* ── Nigeria SVG pulse ── */
+      @keyframes ng-pulse {
+        0% {
+          opacity: 0.18;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 0.32;
+          transform: scale(1.04);
+        }
+        100% {
+          opacity: 0.18;
+          transform: scale(1);
+        }
+      }
+      #nigeria-bg {
+        animation: ng-pulse 4s ease-in-out infinite;
+      }
+
+      /* ── Orange glow blob ── */
+      .glow {
+        position: absolute;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(216, 125, 74, 0.18) 0%,
+          transparent 70%
+        );
+        pointer-events: none;
+      }
+
+      /* ── Timeline row ── */
+      .tl-row {
+        display: flex;
+        gap: 1.2rem;
+        align-items: flex-start;
+        margin-bottom: 1.8rem;
+      }
+      .tl-dot {
+        flex-shrink: 0;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: #d87d4a;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.82rem;
+        font-weight: 900;
+        color: #0d0d0d;
+        margin-top: 2px;
+      }
+      .tl-content h4 {
+        font-size: 0.95rem;
+        font-weight: 800;
+        margin-bottom: 0.25rem;
+      }
+      .tl-content p {
+        font-size: 0.82rem;
+        color: rgba(249, 246, 241, 0.6);
+        line-height: 1.6;
+      }
+
+      /* ── Q&A cards ── */
+      .qa-card {
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 14px;
+        padding: 1.4rem 1.6rem;
+        cursor: pointer;
+        transition:
+          border-color 0.25s,
+          background 0.25s;
+        border-left: 3px solid #d87d4a;
+      }
+      .qa-card:hover {
+        background: rgba(216, 125, 74, 0.07);
+        border-color: rgba(216, 125, 74, 0.4);
+      }
+      .qa-card .q {
+        font-size: 0.9rem;
+        font-weight: 700;
+        color: #f9f6f1;
+        line-height: 1.5;
+      }
+      .qa-card .a {
+        font-size: 0.83rem;
+        font-weight: 500;
+        color: rgba(249, 246, 241, 0.65);
+        line-height: 1.7;
+        margin-top: 0.75rem;
+        display: none;
+        padding-top: 0.75rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.07);
+      }
+      .qa-card.open .a {
+        display: block;
+      }
+      .qa-card .chevron {
+        transition: transform 0.3s;
+        flex-shrink: 0;
+        font-size: 0.9rem;
+      }
+      .qa-card.open .chevron {
+        transform: rotate(180deg);
+      }
+
+      /* ── Divider ── */
+      .orange-rule {
+        height: 1px;
+        background: linear-gradient(90deg, #d87d4a, transparent);
+        margin: 2rem 0;
+      }
+
+      /* ── Screen title header ── */
+      .screen-label {
+        position: absolute;
+        top: 2.5rem;
+        left: 6vw;
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: rgba(249, 246, 241, 0.2);
+      }
+
+      /* ── Role tags (team section) ── */
+      .role-tag {
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        background: rgba(216, 125, 74, 0.15);
+        color: #d87d4a;
+        padding: 0.25rem 0.75rem;
+        border-radius: 999px;
+      }
+
+      @media (max-width: 640px) {
+        .slide {
+          padding: 3rem 5vw;
+        }
+        #nav-dots {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ════════════════════════════════════
+     NAV DOTS + COUNTER
+════════════════════════════════════ -->
+    <div id="nav-dots"></div>
+    <div id="slide-counter">01 / 09</div>
+
+    <!-- ════════════════════════════════════
+     SLIDE 01 — TITLE
+════════════════════════════════════ -->
+    <section class="slide" id="slide-1" style="background: #0d0d0d">
+      <div
+        class="glow"
+        style="width: 600px; height: 600px; top: -100px; right: -150px"
+      ></div>
+
+      <div class="reveal" style="max-width: 820px">
+        <span class="overline">Final Project — Full Stack Development</span>
+
+        <h1
+          style="
+            font-size: clamp(2.8rem, 8vw, 6.5rem);
+            font-weight: 900;
+            line-height: 1;
+            letter-spacing: -0.02em;
+            margin-bottom: 1.5rem;
+          "
+        >
+          Audio<span style="color: #d87d4a">phile</span><br />
+          <span
+            style="
+              font-size: clamp(1.4rem, 4vw, 3rem);
+              font-weight: 300;
+              color: rgba(249, 246, 241, 0.45);
+            "
+            >Nigeria's Premium Audio Store</span
+          >
+        </h1>
+
+        <p
+          class="reveal reveal-delay-2"
+          style="
+            font-size: clamp(0.95rem, 2vw, 1.2rem);
+            color: rgba(249, 246, 241, 0.6);
+            max-width: 560px;
+            line-height: 1.8;
+            font-weight: 500;
+          "
+        >
+          A production-ready e-commerce platform built on the MERN stack with
+          TypeScript — designed specifically for the Nigerian consumer audio
+          market.
+        </p>
+
+        <div
+          class="reveal reveal-delay-3"
+          style="
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 2.5rem;
+          "
+        >
+          <span class="pill">MongoDB</span>
+          <span class="pill">Express.js</span>
+          <span class="pill">React 18</span>
+          <span class="pill">Node.js</span>
+          <span class="pill">TypeScript</span>
+          <span class="pill">Cloudinary</span>
+          <span class="pill">JWT Auth</span>
+        </div>
+      </div>
+
+      <!-- scroll hint -->
+      <div
+        class="reveal reveal-delay-5"
+        style="
+          position: absolute;
+          bottom: 2.5rem;
+          left: 6vw;
+          display: flex;
+          align-items: center;
+          gap: 0.75rem;
+          opacity: 0.4;
+          font-size: 0.78rem;
+          font-weight: 600;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+        "
+      >
+        <span>Scroll to explore</span>
+        <span style="animation: bounce 1.6s ease-in-out infinite">↓</span>
+      </div>
+      <style>
+        @keyframes bounce {
+          0%,
+          100% {
+            transform: translateY(0);
+          }
+          50% {
+            transform: translateY(6px);
+          }
+        }
+      </style>
+    </section>
+
+    <!-- ════════════════════════════════════
+     SLIDE 02 — THE PROBLEM
+════════════════════════════════════ -->
+    <section class="slide" id="slide-2" style="background: #111111">
+      <span class="screen-label">The Problem</span>
+      <div
+        class="glow"
+        style="width: 500px; height: 500px; bottom: -100px; left: -100px"
+      ></div>
+
+      <div style="max-width: 900px">
+        <div class="overline reveal">Market Gap Identified</div>
+        <h2
+          class="reveal reveal-delay-1"
+          style="
+            font-size: clamp(2rem, 5vw, 4rem);
+            font-weight: 900;
+            line-height: 1.1;
+            letter-spacing: -0.01em;
+            margin-bottom: 1.5rem;
+          "
+        >
+          Nigeria's audio market is growing fast.<br />
+          <span style="color: #d87d4a"
+            >Nobody is serving it properly online.</span
+          >
+        </h2>
+
+        <div class="orange-rule reveal reveal-delay-2"></div>
+
+        <div
+          class="reveal reveal-delay-2"
+          style="
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.2rem;
+            margin-top: 0.5rem;
+          "
+        >
+          <div class="stat-card">
+            <div class="big">₦2.1T</div>
+            <div class="label">Electronics market size</div>
+            <div class="sub">
+              Nigeria's consumer electronics market valuation — one of Africa's
+              largest, growing annually at 11.4%
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="big">67M+</div>
+            <div class="label">Internet users</div>
+            <div class="sub">
+              Nigeria has the highest internet user count in Africa — a massive
+              digital-native buying audience
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="big">73%</div>
+            <div class="label">Mobile-first shoppers</div>
+            <div class="sub">
+              Of Nigerian online shoppers browse and buy primarily on mobile
+              devices — demanding responsive design
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="big">0</div>
+            <div class="label">Dedicated premium audio stores</div>
+            <div class="sub">
+              No Nigerian-built, responsive, full-stack e-commerce platform
+              exists specifically for premium audio gear
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════
+     SLIDE 03 — WHY NIGERIA
+════════════════════════════════════ -->
+    <section
+      class="slide"
+      id="slide-3"
+      style="background: #0d0d0d; position: relative"
+    >
+      <span class="screen-label">Market Fit</span>
+
+      <!-- Nigeria SVG silhouette background -->
+      <svg
+        id="nigeria-bg"
+        viewBox="0 0 300 300"
+        xmlns="http://www.w3.org/2000/svg"
+        style="
+          position: absolute;
+          right: -2%;
+          top: 50%;
+          transform: translateY(-50%);
+          width: min(500px, 55vw);
+          height: auto;
+          opacity: 0.18;
+          pointer-events: none;
+        "
+      >
+        <path
+          d="M90,20 L100,18 L115,22 L130,20 L145,25 L160,22 L175,28 L185,25 L200,30
+             L210,40 L215,55 L210,70 L215,85 L210,100 L205,115 L200,130 L195,145
+             L190,158 L185,170 L175,180 L165,188 L155,195 L148,205 L145,218
+             L140,228 L135,238 L128,245 L120,250 L115,242 L110,232 L105,220
+             L100,210 L95,200 L88,190 L80,180 L75,168 L70,155 L68,140
+             L65,125 L62,110 L60,95 L58,80 L60,65 L62,50 L68,38 L78,28 Z"
+          fill="#D87D4A"
+          stroke="none"
+        />
+        <!-- Kano dot -->
+        <circle cx="145" cy="80" r="6" fill="#FBAF85" />
+        <!-- Lagos dot -->
+        <circle cx="95" cy="195" r="8" fill="#FBAF85" />
+        <!-- Abuja dot -->
+        <circle cx="135" cy="140" r="7" fill="#FBAF85" />
+        <!-- Port Harcourt dot -->
+        <circle cx="120" cy="210" r="5" fill="#FBAF85" />
+        <!-- Ibadan dot -->
+        <circle cx="85" cy="175" r="5" fill="#FBAF85" />
+      </svg>
+
+      <div style="max-width: 680px; position: relative; z-index: 2">
+        <div class="overline reveal">Why Nigeria? Why Now?</div>
+        <h2
+          class="reveal reveal-delay-1"
+          style="
+            font-size: clamp(1.8rem, 4vw, 3.2rem);
+            font-weight: 900;
+            line-height: 1.15;
+            margin-bottom: 2rem;
+          "
+        >
+          Five converging forces make this the right market, right now.
+        </h2>
+
+        <div style="display: flex; flex-direction: column; gap: 0">
+          <div class="tl-row reveal reveal-delay-1">
+            <div class="tl-dot">1</div>
+            <div class="tl-content">
+              <h4>The Afrobeats & Podcast Boom</h4>
+              <p>
+                Nigeria exports more music content than any other African
+                nation. Creators, engineers, and everyday consumers are
+                investing heavily in audio quality — headphones, studio
+                monitors, and wireless earphones are aspirational purchases.
+              </p>
+            </div>
+          </div>
+          <div class="tl-row reveal reveal-delay-2">
+            <div class="tl-dot">2</div>
+            <div class="tl-content">
+              <h4>Rising Middle-Class Disposable Income</h4>
+              <p>
+                Nigeria's expanding urban middle class (est. 11M households) are
+                actively seeking premium goods. Products priced
+                ₦150,000–₦750,000 are attainable for this demographic and signal
+                status.
+              </p>
+            </div>
+          </div>
+          <div class="tl-row reveal reveal-delay-3">
+            <div class="tl-dot">3</div>
+            <div class="tl-content">
+              <h4>E-commerce Infrastructure Maturing</h4>
+              <p>
+                Opay, Flutterwave, Paystack and bank transfers have normalised
+                online payments. Nigerians are comfortable buying high-value
+                goods digitally.
+              </p>
+            </div>
+          </div>
+          <div class="tl-row reveal reveal-delay-4">
+            <div class="tl-dot">4</div>
+            <div class="tl-content">
+              <h4>Work-From-Home & Remote Culture</h4>
+              <p>
+                Post-2020 hybrid work culture has permanently increased demand
+                for quality headsets, speakers, and earphones for calls,
+                content, and music.
+              </p>
+            </div>
+          </div>
+          <div class="tl-row reveal reveal-delay-5">
+            <div class="tl-dot">5</div>
+            <div class="tl-content">
+              <h4>Gen Z Digital Natives Are Buying</h4>
+              <p>
+                Nigeria's 18–34 age group (the largest demographic) are
+                brand-conscious, quality-aware, and prefer curated online
+                shopping experiences over the chaos of open markets.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════
+     SLIDE 04 — THE SOLUTION
+════════════════════════════════════ -->
+    <section class="slide" id="slide-4" style="background: #111">
+      <span class="screen-label">The Solution</span>
+      <div
+        class="glow"
+        style="width: 700px; height: 700px; top: -200px; right: -200px"
+      ></div>
+
+      <div style="max-width: 960px">
+        <div class="overline reveal">What We Built</div>
+        <h2
+          class="reveal reveal-delay-1"
+          style="
+            font-size: clamp(1.8rem, 4.5vw, 3.8rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+          "
+        >
+          A complete, production-grade<br /><span style="color: #d87d4a"
+            >audio e-commerce platform</span
+          >
+        </h2>
+
+        <div
+          class="reveal reveal-delay-2"
+          style="
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1rem;
+          "
+        >
+          <div
+            style="
+              background: rgba(255, 255, 255, 0.03);
+              border: 1px solid rgba(255, 255, 255, 0.08);
+              border-radius: 16px;
+              padding: 1.6rem;
+            "
+          >
+            <div style="font-size: 1.8rem; margin-bottom: 0.8rem">🛒</div>
+            <h3
+              style="font-size: 1rem; font-weight: 800; margin-bottom: 0.5rem"
+            >
+              Full Shopping Experience
+            </h3>
+            <p
+              style="
+                font-size: 0.82rem;
+                color: rgba(249, 246, 241, 0.55);
+                line-height: 1.7;
+              "
+            >
+              Product browsing, detailed pages, cart management, and a validated
+              checkout flow with e-Money and cash on delivery options.
+            </p>
+          </div>
+
+          <div
+            style="
+              background: rgba(255, 255, 255, 0.03);
+              border: 1px solid rgba(255, 255, 255, 0.08);
+              border-radius: 16px;
+              padding: 1.6rem;
+            "
+          >
+            <div style="font-size: 1.8rem; margin-bottom: 0.8rem">🔐</div>
+            <h3
+              style="font-size: 1rem; font-weight: 800; margin-bottom: 0.5rem"
+            >
+              Secure Authentication
+            </h3>
+            <p
+              style="
+                font-size: 0.82rem;
+                color: rgba(249, 246, 241, 0.55);
+                line-height: 1.7;
+              "
+            >
+              JWT-based registration and login, protected routes, user profile
+              management, Cloudinary avatar uploads, and order history.
+            </p>
+          </div>
+
+          <div
+            style="
+              background: rgba(255, 255, 255, 0.03);
+              border: 1px solid rgba(255, 255, 255, 0.08);
+              border-radius: 16px;
+              padding: 1.6rem;
+            "
+          >
+            <div style="font-size: 1.8rem; margin-bottom: 0.8rem">⚙️</div>
+            <h3
+              style="font-size: 1rem; font-weight: 800; margin-bottom: 0.5rem"
+            >
+              Admin Dashboard
+            </h3>
+            <p
+              style="
+                font-size: 0.82rem;
+                color: rgba(249, 246, 241, 0.55);
+                line-height: 1.7;
+              "
+            >
+              Full product CRUD, order status management, user role control,
+              revenue analytics, and a monthly revenue chart — all behind
+              protected admin routes.
+            </p>
+          </div>
+
+          <div
+            style="
+              background: rgba(255, 255, 255, 0.03);
+              border: 1px solid rgba(255, 255, 255, 0.08);
+              border-radius: 16px;
+              padding: 1.6rem;
+            "
+          >
+            <div style="font-size: 1.8rem; margin-bottom: 0.8rem">📱</div>
+            <h3
+              style="font-size: 1rem; font-weight: 800; margin-bottom: 0.5rem"
+            >
+              Mobile-First Design
+            </h3>
+            <p
+              style="
+                font-size: 0.82rem;
+                color: rgba(249, 246, 241, 0.55);
+                line-height: 1.7;
+              "
+            >
+              Responsive across all screen sizes — mobile (375px), tablet
+              (768px), desktop (1024px+) — 1366px and 1440px screens are
+              pixel-identical.
+            </p>
+          </div>
+
+          <div
+            style="
+              background: rgba(255, 255, 255, 0.03);
+              border: 1px solid rgba(255, 255, 255, 0.08);
+              border-radius: 16px;
+              padding: 1.6rem;
+            "
+          >
+            <div style="font-size: 1.8rem; margin-bottom: 0.8rem">☁️</div>
+            <h3
+              style="font-size: 1rem; font-weight: 800; margin-bottom: 0.5rem"
+            >
+              Cloud Image Storage
+            </h3>
+            <p
+              style="
+                font-size: 0.82rem;
+                color: rgba(249, 246, 241, 0.55);
+                line-height: 1.7;
+              "
+            >
+              All product and user images served from Cloudinary CDN for fast
+              loading globally — optimised for Nigerian broadband conditions.
+            </p>
+          </div>
+
+          <div
+            style="
+              background: rgba(255, 255, 255, 0.03);
+              border: 1px solid rgba(255, 255, 255, 0.08);
+              border-radius: 16px;
+              padding: 1.6rem;
+            "
+          >
+            <div style="font-size: 1.8rem; margin-bottom: 0.8rem">⚡</div>
+            <h3
+              style="font-size: 1rem; font-weight: 800; margin-bottom: 0.5rem"
+            >
+              Performance-Optimised
+            </h3>
+            <p
+              style="
+                font-size: 0.82rem;
+                color: rgba(249, 246, 241, 0.55);
+                line-height: 1.7;
+              "
+            >
+              Lazy-loaded pages, code splitting, localStorage cart persistence,
+              and a custom 404 page — built to Vercel deployment standards.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════
+     SLIDE 05 — TECH STACK
+════════════════════════════════════ -->
+    <section class="slide" id="slide-5" style="background: #0d0d0d">
+      <span class="screen-label">Architecture</span>
+
+      <div style="max-width: 960px; width: 100%">
+        <div class="overline reveal">Technical Architecture</div>
+        <h2
+          class="reveal reveal-delay-1"
+          style="
+            font-size: clamp(1.8rem, 4vw, 3rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 2.5rem;
+          "
+        >
+          Industry-standard stack, zero shortcuts.
+        </h2>
+
+        <div
+          style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem"
+          class="reveal reveal-delay-2"
+        >
+          <!-- Frontend -->
+          <div>
+            <p class="overline" style="font-size: 0.65rem">Frontend — Client</p>
+            <div
+              style="
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.6rem;
+                margin-top: 0.5rem;
+              "
+            >
+              <span class="tech-badge">React 18</span>
+              <span class="tech-badge">TypeScript</span>
+              <span class="tech-badge">Vite</span>
+              <span class="tech-badge">Tailwind CSS</span>
+              <span class="tech-badge">React Router v6</span>
+              <span class="tech-badge">Axios</span>
+              <span class="tech-badge">Context API</span>
+              <span class="tech-badge">Lazy Loading</span>
+              <span class="tech-badge">React Hot Toast</span>
+            </div>
+          </div>
+
+          <!-- Backend -->
+          <div>
+            <p class="overline" style="font-size: 0.65rem">Backend — Server</p>
+            <div
+              style="
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.6rem;
+                margin-top: 0.5rem;
+              "
+            >
+              <span class="tech-badge">Node.js</span>
+              <span class="tech-badge">Express.js</span>
+              <span class="tech-badge">TypeScript</span>
+              <span class="tech-badge">MongoDB Atlas</span>
+              <span class="tech-badge">Mongoose</span>
+              <span class="tech-badge">JWT</span>
+              <span class="tech-badge">bcryptjs</span>
+              <span class="tech-badge">Multer</span>
+              <span class="tech-badge">CORS</span>
+            </div>
+          </div>
+
+          <!-- Cloud -->
+          <div>
+            <p class="overline" style="font-size: 0.65rem">Cloud & DevOps</p>
+            <div
+              style="
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.6rem;
+                margin-top: 0.5rem;
+              "
+            >
+              <span class="tech-badge">Cloudinary CDN</span>
+              <span class="tech-badge">Vercel (Client)</span>
+              <span class="tech-badge">Render (Server)</span>
+              <span class="tech-badge">MongoDB Atlas</span>
+              <span class="tech-badge">Git / GitHub</span>
+            </div>
+          </div>
+
+          <!-- Design -->
+          <div>
+            <p class="overline" style="font-size: 0.65rem">Design & UX</p>
+            <div
+              style="
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.6rem;
+                margin-top: 0.5rem;
+              "
+            >
+              <span class="tech-badge">Manrope Typeface</span>
+              <span class="tech-badge">Mobile-First</span>
+              <span class="tech-badge">Custom 404</span>
+              <span class="tech-badge">SPA Routing</span>
+              <span class="tech-badge">Toast Notifications</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Architecture diagram -->
+        <div
+          class="reveal reveal-delay-3"
+          style="
+            margin-top: 2.5rem;
+            background: rgba(216, 125, 74, 0.06);
+            border: 1px solid rgba(216, 125, 74, 0.2);
+            border-radius: 14px;
+            padding: 1.4rem;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: rgba(249, 246, 241, 0.7);
+          "
+        >
+          <div
+            style="
+              display: flex;
+              align-items: center;
+              flex-wrap: wrap;
+              gap: 0.5rem;
+            "
+          >
+            <span
+              style="
+                background: #d87d4a;
+                color: #0d0d0d;
+                padding: 0.25rem 0.75rem;
+                border-radius: 6px;
+                font-weight: 800;
+              "
+              >Browser</span
+            >
+            <span style="color: #d87d4a">→</span>
+            <span
+              style="
+                background: rgba(255, 255, 255, 0.08);
+                padding: 0.25rem 0.75rem;
+                border-radius: 6px;
+              "
+              >Vercel CDN</span
+            >
+            <span style="color: #d87d4a">→</span>
+            <span
+              style="
+                background: rgba(255, 255, 255, 0.08);
+                padding: 0.25rem 0.75rem;
+                border-radius: 6px;
+              "
+              >React App (Vite)</span
+            >
+            <span style="color: #d87d4a">→</span>
+            <span
+              style="
+                background: rgba(255, 255, 255, 0.08);
+                padding: 0.25rem 0.75rem;
+                border-radius: 6px;
+              "
+              >Axios + JWT</span
+            >
+            <span style="color: #d87d4a">→</span>
+            <span
+              style="
+                background: rgba(255, 255, 255, 0.08);
+                padding: 0.25rem 0.75rem;
+                border-radius: 6px;
+              "
+              >Render Server</span
+            >
+            <span style="color: #d87d4a">→</span>
+            <span
+              style="
+                background: rgba(255, 255, 255, 0.08);
+                padding: 0.25rem 0.75rem;
+                border-radius: 6px;
+              "
+              >Express API</span
+            >
+            <span style="color: #d87d4a">→</span>
+            <span
+              style="
+                background: rgba(255, 255, 255, 0.08);
+                padding: 0.25rem 0.75rem;
+                border-radius: 6px;
+              "
+              >MongoDB Atlas</span
+            >
+          </div>
+          <div
+            style="
+              margin-top: 0.75rem;
+              display: flex;
+              align-items: center;
+              gap: 0.5rem;
+              flex-wrap: wrap;
+            "
+          >
+            <span style="color: rgba(249, 246, 241, 0.4)">Image uploads:</span>
+            <span
+              style="
+                background: rgba(255, 255, 255, 0.08);
+                padding: 0.25rem 0.75rem;
+                border-radius: 6px;
+              "
+              >Express + Multer</span
+            >
+            <span style="color: #d87d4a">→</span>
+            <span
+              style="
+                background: rgba(255, 255, 255, 0.08);
+                padding: 0.25rem 0.75rem;
+                border-radius: 6px;
+              "
+              >Cloudinary CDN</span
+            >
+            <span style="color: #d87d4a">→</span>
+            <span
+              style="
+                background: rgba(255, 255, 255, 0.08);
+                padding: 0.25rem 0.75rem;
+                border-radius: 6px;
+              "
+              >URL stored in MongoDB</span
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════
+     SLIDE 06 — ACCESS LEVELS
+════════════════════════════════════ -->
+    <section class="slide" id="slide-6" style="background: #111">
+      <span class="screen-label">User Access Levels</span>
+      <div
+        class="glow"
+        style="width: 400px; height: 400px; bottom: -50px; right: 10%"
+      ></div>
+
+      <div style="max-width: 960px; width: 100%">
+        <div class="overline reveal">Role-Based Access Control</div>
+        <h2
+          class="reveal reveal-delay-1"
+          style="
+            font-size: clamp(1.6rem, 3.5vw, 2.8rem);
+            font-weight: 900;
+            margin-bottom: 2rem;
+          "
+        >
+          Three distinct user experiences, one platform.
+        </h2>
+
+        <div
+          class="reveal reveal-delay-2"
+          style="
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+          "
+        >
+          <!-- Guest -->
+          <div
+            style="
+              border: 1px solid rgba(255, 255, 255, 0.1);
+              border-radius: 18px;
+              overflow: hidden;
+            "
+          >
+            <div
+              style="
+                background: rgba(255, 255, 255, 0.06);
+                padding: 1.2rem 1.5rem;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+              "
+            >
+              <span style="font-size: 1.4rem">👤</span>
+              <h3 style="font-size: 1rem; font-weight: 800; margin-top: 0.5rem">
+                Guest Visitor
+              </h3>
+              <p
+                style="
+                  font-size: 0.75rem;
+                  color: rgba(249, 246, 241, 0.4);
+                  margin-top: 0.2rem;
+                "
+              >
+                No account required
+              </p>
+            </div>
+            <div style="padding: 1.2rem 1.5rem">
+              <ul
+                style="
+                  list-style: none;
+                  font-size: 0.82rem;
+                  color: rgba(249, 246, 241, 0.65);
+                  line-height: 2;
+                  display: flex;
+                  flex-direction: column;
+                  gap: 0.1rem;
+                "
+              >
+                <li>✅ Browse all products</li>
+                <li>✅ View product details</li>
+                <li>✅ Add to cart</li>
+                <li>✅ Checkout as guest</li>
+                <li>❌ Order history</li>
+                <li>❌ Save profile details</li>
+                <li>❌ Avatar &amp; settings</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Registered -->
+          <div
+            style="
+              border: 2px solid #d87d4a;
+              border-radius: 18px;
+              overflow: hidden;
+              position: relative;
+            "
+          >
+            <div
+              style="
+                position: absolute;
+                top: 1rem;
+                right: 1rem;
+                background: #d87d4a;
+                color: #0d0d0d;
+                font-size: 0.65rem;
+                font-weight: 800;
+                padding: 0.2rem 0.6rem;
+                border-radius: 999px;
+                letter-spacing: 0.06em;
+              "
+            >
+              RECOMMENDED
+            </div>
+            <div
+              style="
+                background: rgba(216, 125, 74, 0.1);
+                padding: 1.2rem 1.5rem;
+                border-bottom: 1px solid rgba(216, 125, 74, 0.2);
+              "
+            >
+              <span style="font-size: 1.4rem">🔐</span>
+              <h3
+                style="
+                  font-size: 1rem;
+                  font-weight: 800;
+                  margin-top: 0.5rem;
+                  color: #d87d4a;
+                "
+              >
+                Registered User
+              </h3>
+              <p
+                style="
+                  font-size: 0.75rem;
+                  color: rgba(249, 246, 241, 0.4);
+                  margin-top: 0.2rem;
+                "
+              >
+                Create a free account
+              </p>
+            </div>
+            <div style="padding: 1.2rem 1.5rem">
+              <ul
+                style="
+                  list-style: none;
+                  font-size: 0.82rem;
+                  color: rgba(249, 246, 241, 0.65);
+                  line-height: 2;
+                "
+              >
+                <li>✅ Everything guests can do</li>
+                <li>✅ Orders linked to account</li>
+                <li>✅ View order history</li>
+                <li>✅ Profile settings</li>
+                <li>✅ Upload avatar photo</li>
+                <li>✅ Pre-filled checkout</li>
+                <li>❌ Admin controls</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Admin -->
+          <div
+            style="
+              border: 1px solid rgba(255, 255, 255, 0.1);
+              border-radius: 18px;
+              overflow: hidden;
+            "
+          >
+            <div
+              style="
+                background: rgba(255, 255, 255, 0.06);
+                padding: 1.2rem 1.5rem;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+              "
+            >
+              <span style="font-size: 1.4rem">👑</span>
+              <h3 style="font-size: 1rem; font-weight: 800; margin-top: 0.5rem">
+                Store Admin
+              </h3>
+              <p
+                style="
+                  font-size: 0.75rem;
+                  color: rgba(249, 246, 241, 0.4);
+                  margin-top: 0.2rem;
+                "
+              >
+                Owner / operator access
+              </p>
+            </div>
+            <div style="padding: 1.2rem 1.5rem">
+              <ul
+                style="
+                  list-style: none;
+                  font-size: 0.82rem;
+                  color: rgba(249, 246, 241, 0.65);
+                  line-height: 2;
+                "
+              >
+                <li>✅ Everything above</li>
+                <li>✅ Dashboard + analytics</li>
+                <li>✅ Add / edit / delete products</li>
+                <li>✅ Upload product images</li>
+                <li>✅ Update order statuses</li>
+                <li>✅ View all orders</li>
+                <li>✅ Manage user accounts</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════
+     SLIDE 07 — BUSINESS CASE
+════════════════════════════════════ -->
+    <section class="slide" id="slide-7" style="background: #0d0d0d">
+      <span class="screen-label">Business Model</span>
+      <div
+        class="glow"
+        style="width: 600px; height: 600px; top: -100px; left: -200px"
+      ></div>
+
+      <div style="max-width: 900px">
+        <div class="overline reveal">Commercial Viability</div>
+        <h2
+          class="reveal reveal-delay-1"
+          style="
+            font-size: clamp(1.8rem, 4vw, 3.2rem);
+            font-weight: 900;
+            line-height: 1.15;
+            margin-bottom: 2rem;
+          "
+        >
+          This is not just a project.<br /><span style="color: #d87d4a"
+            >It is a launchable business.</span
+          >
+        </h2>
+
+        <div
+          class="reveal reveal-delay-2"
+          style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem"
+        >
+          <div
+            style="
+              grid-column: 1/-1;
+              background: rgba(216, 125, 74, 0.08);
+              border: 1px solid rgba(216, 125, 74, 0.25);
+              border-radius: 14px;
+              padding: 1.5rem;
+              display: flex;
+              gap: 1.5rem;
+              flex-wrap: wrap;
+              align-items: center;
+            "
+          >
+            <div style="flex: 1; min-width: 200px">
+              <p
+                style="
+                  font-size: 0.78rem;
+                  color: rgba(249, 246, 241, 0.5);
+                  text-transform: uppercase;
+                  letter-spacing: 0.1em;
+                  font-weight: 700;
+                  margin-bottom: 0.3rem;
+                "
+              >
+                Revenue Scenario — Year 1
+              </p>
+              <p
+                style="
+                  font-size: 0.9rem;
+                  line-height: 1.7;
+                  color: rgba(249, 246, 241, 0.75);
+                "
+              >
+                If just <strong style="color: #d87d4a">2 units/day</strong> are
+                sold at an average price of
+                <strong style="color: #d87d4a">₦180,000</strong>, the platform
+                generates
+                <strong style="color: #d87d4a">₦131.4M annually</strong> — a
+                viable SME income before scaling.
+              </p>
+            </div>
+            <div style="text-align: center">
+              <div style="font-size: 2.5rem; font-weight: 900; color: #d87d4a">
+                ₦131M+
+              </div>
+              <div
+                style="
+                  font-size: 0.72rem;
+                  color: rgba(249, 246, 241, 0.4);
+                  letter-spacing: 0.08em;
+                  text-transform: uppercase;
+                "
+              >
+                Projected Year 1 Revenue
+              </div>
+            </div>
+          </div>
+
+          <div
+            style="
+              background: rgba(255, 255, 255, 0.03);
+              border: 1px solid rgba(255, 255, 255, 0.08);
+              border-radius: 14px;
+              padding: 1.4rem;
+            "
+          >
+            <h4
+              style="
+                font-size: 0.9rem;
+                font-weight: 800;
+                margin-bottom: 0.75rem;
+              "
+            >
+              Revenue Streams
+            </h4>
+            <ul
+              style="
+                font-size: 0.82rem;
+                color: rgba(249, 246, 241, 0.6);
+                line-height: 2;
+                list-style: none;
+              "
+            >
+              <li>📦 Direct product sales</li>
+              <li>🤝 Brand partnerships (Sony, JBL, Sennheiser)</li>
+              <li>🏪 Marketplace model (third-party sellers)</li>
+              <li>🛡️ Extended warranty upsells</li>
+              <li>📣 Sponsored product placement</li>
+            </ul>
+          </div>
+
+          <div
+            style="
+              background: rgba(255, 255, 255, 0.03);
+              border: 1px solid rgba(255, 255, 255, 0.08);
+              border-radius: 14px;
+              padding: 1.4rem;
+            "
+          >
+            <h4
+              style="
+                font-size: 0.9rem;
+                font-weight: 800;
+                margin-bottom: 0.75rem;
+              "
+            >
+              Competitive Advantages
+            </h4>
+            <ul
+              style="
+                font-size: 0.82rem;
+                color: rgba(249, 246, 241, 0.6);
+                line-height: 2;
+                list-style: none;
+              "
+            >
+              <li>🎯 Category-focused (not generic)</li>
+              <li>⚡ Faster load times than Jumia</li>
+              <li>💳 Cash on Delivery supported</li>
+              <li>📱 Truly mobile-optimised UI</li>
+              <li>🛠️ Admin controls — no dev needed</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════
+     SLIDE 08 — CHALLENGES & LEARNING
+════════════════════════════════════ -->
+    <section class="slide" id="slide-8" style="background: #111">
+      <span class="screen-label">Development Journey</span>
+
+      <div style="max-width: 900px; width: 100%">
+        <div class="overline reveal">Challenges & What We Learned</div>
+        <h2
+          class="reveal reveal-delay-1"
+          style="
+            font-size: clamp(1.6rem, 3.5vw, 2.8rem);
+            font-weight: 900;
+            margin-bottom: 2rem;
+          "
+        >
+          Real problems. Real solutions.
+        </h2>
+
+        <div
+          class="reveal reveal-delay-2"
+          style="
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.2rem;
+          "
+        >
+          <div
+            style="
+              background: rgba(255, 255, 255, 0.03);
+              border: 1px solid rgba(255, 255, 255, 0.07);
+              border-radius: 14px;
+              padding: 1.4rem;
+              border-top: 3px solid #d87d4a;
+            "
+          >
+            <h4
+              style="
+                font-size: 0.9rem;
+                font-weight: 800;
+                color: #d87d4a;
+                margin-bottom: 0.5rem;
+              "
+            >
+              Challenge 1
+            </h4>
+            <p
+              style="
+                font-size: 0.88rem;
+                font-weight: 700;
+                margin-bottom: 0.4rem;
+              "
+            >
+              TypeScript type safety across the stack
+            </p>
+            <p
+              style="
+                font-size: 0.8rem;
+                color: rgba(249, 246, 241, 0.55);
+                line-height: 1.7;
+              "
+            >
+              Keeping client-side and server-side types in sync across Mongoose
+              models, API responses, and React components required careful
+              interface design.
+            </p>
+            <div
+              style="
+                margin-top: 0.8rem;
+                font-size: 0.78rem;
+                color: #fbaf85;
+                font-weight: 700;
+              "
+            >
+              ✓ Solution: Shared interface naming conventions + explicit
+              response typing on Axios calls
+            </div>
+          </div>
+
+          <div
+            style="
+              background: rgba(255, 255, 255, 0.03);
+              border: 1px solid rgba(255, 255, 255, 0.07);
+              border-radius: 14px;
+              padding: 1.4rem;
+              border-top: 3px solid #d87d4a;
+            "
+          >
+            <h4
+              style="
+                font-size: 0.9rem;
+                font-weight: 800;
+                color: #d87d4a;
+                margin-bottom: 0.5rem;
+              "
+            >
+              Challenge 2
+            </h4>
+            <p
+              style="
+                font-size: 0.88rem;
+                font-weight: 700;
+                margin-bottom: 0.4rem;
+              "
+            >
+              JWT auth across page refreshes
+            </p>
+            <p
+              style="
+                font-size: 0.8rem;
+                color: rgba(249, 246, 241, 0.55);
+                line-height: 1.7;
+              "
+            >
+              Ensuring the user stays logged in after a browser refresh —
+              without flashing a login redirect — required careful localStorage
+              hydration before rendering protected routes.
+            </p>
+            <div
+              style="
+                margin-top: 0.8rem;
+                font-size: 0.78rem;
+                color: #fbaf85;
+                font-weight: 700;
+              "
+            >
+              ✓ Solution: AuthContext loading state blocks rendering until
+              localStorage is checked
+            </div>
+          </div>
+
+          <div
+            style="
+              background: rgba(255, 255, 255, 0.03);
+              border: 1px solid rgba(255, 255, 255, 0.07);
+              border-radius: 14px;
+              padding: 1.4rem;
+              border-top: 3px solid #d87d4a;
+            "
+          >
+            <h4
+              style="
+                font-size: 0.9rem;
+                font-weight: 800;
+                color: #d87d4a;
+                margin-bottom: 0.5rem;
+              "
+            >
+              Challenge 3
+            </h4>
+            <p
+              style="
+                font-size: 0.88rem;
+                font-weight: 700;
+                margin-bottom: 0.4rem;
+              "
+            >
+              Vercel SPA 404 routing
+            </p>
+            <p
+              style="
+                font-size: 0.8rem;
+                color: rgba(249, 246, 241, 0.55);
+                line-height: 1.7;
+              "
+            >
+              React Router routes like /headphones work in the browser but
+              Vercel returns a 404 when someone refreshes on that URL — a common
+              SPA deployment pitfall.
+            </p>
+            <div
+              style="
+                margin-top: 0.8rem;
+                font-size: 0.78rem;
+                color: #fbaf85;
+                font-weight: 700;
+              "
+            >
+              ✓ Solution: vercel.json rewrite rule sends all paths to
+              index.html, preserving our custom 404
+            </div>
+          </div>
+
+          <div
+            style="
+              background: rgba(255, 255, 255, 0.03);
+              border: 1px solid rgba(255, 255, 255, 0.07);
+              border-radius: 14px;
+              padding: 1.4rem;
+              border-top: 3px solid #d87d4a;
+            "
+          >
+            <h4
+              style="
+                font-size: 0.9rem;
+                font-weight: 800;
+                color: #d87d4a;
+                margin-bottom: 0.5rem;
+              "
+            >
+              Challenge 4
+            </h4>
+            <p
+              style="
+                font-size: 0.88rem;
+                font-weight: 700;
+                margin-bottom: 0.4rem;
+              "
+            >
+              Cloudinary image upload pipeline
+            </p>
+            <p
+              style="
+                font-size: 0.8rem;
+                color: rgba(249, 246, 241, 0.55);
+                line-height: 1.7;
+              "
+            >
+              Multer stores files in memory as Buffers, but Cloudinary SDK
+              expects a file path or base64 string — bridging this without
+              writing to disk was non-trivial.
+            </p>
+            <div
+              style="
+                margin-top: 0.8rem;
+                font-size: 0.78rem;
+                color: #fbaf85;
+                font-weight: 700;
+              "
+            >
+              ✓ Solution: Convert Buffer to base64 data URI in-memory before
+              passing to Cloudinary SDK
+            </div>
+          </div>
+        </div>
+
+        <!-- Key learnings bar -->
+        <div
+          class="reveal reveal-delay-3"
+          style="
+            margin-top: 1.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+          "
+        >
+          <span
+            style="
+              font-size: 0.78rem;
+              font-weight: 700;
+              color: rgba(249, 246, 241, 0.4);
+              align-self: center;
+            "
+            >Key learnings:</span
+          >
+          <span class="pill">RBAC patterns</span>
+          <span class="pill">REST API design</span>
+          <span class="pill">Mongoose aggregation</span>
+          <span class="pill">Lazy loading</span>
+          <span class="pill">CDN integration</span>
+          <span class="pill">Deployment pipelines</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════
+     SLIDE 09 — Q&A PREP
+════════════════════════════════════ -->
+    <section
+      class="slide"
+      id="slide-9"
+      style="background: #0d0d0d; min-height: auto; padding-bottom: 6rem"
+    >
+      <span class="screen-label">Judge Q&amp;A Preparation</span>
+      <div
+        class="glow"
+        style="width: 500px; height: 500px; bottom: -100px; right: -100px"
+      ></div>
+
+      <div style="max-width: 900px; width: 100%">
+        <div class="overline reveal">Likely Judge Questions</div>
+        <h2
+          class="reveal reveal-delay-1"
+          style="
+            font-size: clamp(1.6rem, 3.5vw, 2.8rem);
+            font-weight: 900;
+            margin-bottom: 0.5rem;
+          "
+        >
+          Be ready for anything.
+        </h2>
+        <p
+          class="reveal reveal-delay-2"
+          style="
+            font-size: 0.88rem;
+            color: rgba(249, 246, 241, 0.45);
+            margin-bottom: 2rem;
+          "
+        >
+          Click each question to reveal the model answer.
+        </p>
+
+        <div
+          class="reveal reveal-delay-2"
+          style="display: flex; flex-direction: column; gap: 0.85rem"
+          id="qa-list"
+        >
+          <div class="qa-card" onclick="toggleQA(this)">
+            <div
+              style="
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-start;
+                gap: 1rem;
+              "
+            >
+              <div class="q">
+                Why did you choose the MERN stack specifically for this project?
+              </div>
+              <span class="chevron">▾</span>
+            </div>
+            <div class="a">
+              The MERN stack (MongoDB, Express, React, Node.js) uses
+              JavaScript/TypeScript across the entire application — one language
+              from database to browser. This reduces cognitive overhead, allows
+              code reuse for types and interfaces, and has a massive ecosystem
+              of packages. MongoDB's document model maps naturally to product
+              catalogs with varying attributes. React's component model suits a
+              design-heavy e-commerce UI. And Node.js handles concurrent API
+              requests well for a shopping platform. It is also one of the most
+              in-demand stacks in the Nigerian tech job market right now.
+            </div>
+          </div>
+
+          <div class="qa-card" onclick="toggleQA(this)">
+            <div
+              style="
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-start;
+                gap: 1rem;
+              "
+            >
+              <div class="q">
+                How does your application handle security — specifically
+                authentication?
+              </div>
+              <span class="chevron">▾</span>
+            </div>
+            <div class="a">
+              We implement JWT (JSON Web Tokens) for stateless authentication.
+              When a user logs in, the server signs a token with a secret key
+              using HS256 algorithm and returns it. The client stores this token
+              in localStorage and sends it in every subsequent request as a
+              "Bearer" header. On the server, our "protect" middleware verifies
+              the token signature before allowing access to any protected
+              endpoint. Passwords are never stored in plain text — we use
+              bcryptjs with a salt factor of 10 to hash all passwords before
+              saving to MongoDB. Admin routes have a second middleware layer
+              that checks the user's isAdmin flag.
+            </div>
+          </div>
+
+          <div class="qa-card" onclick="toggleQA(this)">
+            <div
+              style="
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-start;
+                gap: 1rem;
+              "
+            >
+              <div class="q">
+                Why TypeScript over plain JavaScript? What value did it add?
+              </div>
+              <span class="chevron">▾</span>
+            </div>
+            <div class="a">
+              TypeScript adds static type checking at compile time — catching
+              bugs before they reach production. For example, if our API returns
+              a product with a "price" field but our React component tries to
+              use "cost", TypeScript throws an error immediately rather than a
+              silent bug at runtime. We defined shared interfaces for all our
+              data shapes — IUser, IProduct, IOrder — which enforces consistency
+              between our Mongoose models and our React components. TypeScript
+              also makes the codebase self-documenting: a new team member can
+              understand exactly what data a function expects just by reading
+              its signature. Every TypeScript-specific line in our codebase has
+              an inline comment explaining it — making it pedagogically clear
+              for students learning TypeScript for the first time.
+            </div>
+          </div>
+
+          <div class="qa-card" onclick="toggleQA(this)">
+            <div
+              style="
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-start;
+                gap: 1rem;
+              "
+            >
+              <div class="q">
+                How does your app perform on slow Nigerian internet connections?
+              </div>
+              <span class="chevron">▾</span>
+            </div>
+            <div class="a">
+              We addressed this in several ways. First, all images are served
+              from Cloudinary's global CDN which has edge nodes closer to
+              African users, dramatically reducing image load times compared to
+              serving from a UK or US server. Second, we use React's lazy() and
+              Suspense to split the JavaScript bundle — instead of loading all 9
+              pages at once, only the page the user is on gets loaded. This cuts
+              the initial bundle size significantly. Third, all product images
+              use loading="lazy" so off-screen images don't block the initial
+              render. Fourth, the shopping cart is persisted in localStorage so
+              users don't lose their cart if their connection drops. These
+              optimizations make the app viable on 3G connections.
+            </div>
+          </div>
+
+          <div class="qa-card" onclick="toggleQA(this)">
+            <div
+              style="
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-start;
+                gap: 1rem;
+              "
+            >
+              <div class="q">
+                What makes this different from just using Shopify or
+                WooCommerce?
+              </div>
+              <span class="chevron">▾</span>
+            </div>
+            <div class="a">
+              Shopify and WooCommerce are excellent platforms but they have
+              significant limitations for the Nigerian market and for our
+              learning objectives. First, Shopify charges monthly fees of
+              $29–$299 USD plus transaction fees — that's ₦45,000–₦460,000
+              monthly just for the platform, before hosting costs. Building
+              custom means no recurring platform fees. Second, customisation is
+              constrained on Shopify — you cannot change the checkout
+              architecture or add custom backend logic without expensive apps.
+              Our platform is 100% ours to extend. Third, and most importantly
+              for this project: building from scratch demonstrates that we
+              understand every layer of a web application — from database schema
+              design to JWT middleware to React state management — which a
+              hosted solution completely hides.
+            </div>
+          </div>
+
+          <div class="qa-card" onclick="toggleQA(this)">
+            <div
+              style="
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-start;
+                gap: 1rem;
+              "
+            >
+              <div class="q">
+                How would you scale this if you had 10,000 users hitting it
+                simultaneously?
+              </div>
+              <span class="chevron">▾</span>
+            </div>
+            <div class="a">
+              Several scaling strategies would be needed. At the database level:
+              MongoDB Atlas supports horizontal sharding and read replicas —
+              we'd enable read replicas so database reads (browsing products)
+              don't compete with writes (placing orders). At the server level:
+              we'd move from a single Render instance to a load-balanced cluster
+              behind Nginx. We'd introduce Redis for caching frequently-accessed
+              data like the product catalogue — most users view the same 6
+              products, so caching API responses reduces database load by ~80%.
+              We'd add a message queue (like Bull with Redis) for order
+              processing so a traffic spike doesn't cause timeout errors. The
+              frontend on Vercel already scales infinitely since it's a static
+              CDN — that's not a bottleneck. We'd also implement rate limiting
+              on the API to prevent abuse.
+            </div>
+          </div>
+
+          <div class="qa-card" onclick="toggleQA(this)">
+            <div
+              style="
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-start;
+                gap: 1rem;
+              "
+            >
+              <div class="q">What would you add if you had 3 more months?</div>
+              <span class="chevron">▾</span>
+            </div>
+            <div class="a">
+              The most impactful additions for the Nigerian market would be: (1)
+              Paystack integration — Nigeria's leading payment gateway — to
+              enable direct card payments, bank transfers, and USSD payments
+              without leaving the site. Currently we support Cash on Delivery
+              and e-Money which are placeholders. (2) Product search with
+              full-text search and filters by price range and category. (3)
+              Product reviews and star ratings — social proof is critical for
+              high-value purchases online. (4) SMS order notifications via
+              Termii or Twilio Africa — Nigerians respond better to SMS than
+              email. (5) A wishlist/save for later feature. (6) Inventory
+              management — track stock levels and automatically show "Out of
+              Stock" badges. (7) Progressive Web App (PWA) capabilities so users
+              can install it on their phone home screen.
+            </div>
+          </div>
+
+          <div class="qa-card" onclick="toggleQA(this)">
+            <div
+              style="
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-start;
+                gap: 1rem;
+              "
+            >
+              <div class="q">
+                Explain how Context API works in your project and why you chose
+                it over Redux.
+              </div>
+              <span class="chevron">▾</span>
+            </div>
+            <div class="a">
+              React's Context API is a built-in solution for sharing state
+              across components without prop drilling (passing data through many
+              layers of components). We have two contexts: AuthContext manages
+              the logged-in user state — any component can call useAuth() to get
+              the current user, log in, or log out without needing to pass those
+              functions down through props. StoreContext manages the shopping
+              cart and product data globally. We chose Context API over Redux
+              because our state requirements are straightforward — we have two
+              bounded domains (auth and cart) with simple operations. Redux adds
+              significant boilerplate (actions, reducers, selectors, middleware)
+              that would be over-engineering for this scale. Context API,
+              combined with useState and useEffect hooks, provides everything we
+              need with far less code and complexity. If the app grew to 50+
+              components with complex shared state and frequent updates, Redux
+              Toolkit would become worth the trade-off.
+            </div>
+          </div>
+
+          <div class="qa-card" onclick="toggleQA(this)">
+            <div
+              style="
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-start;
+                gap: 1rem;
+              "
+            >
+              <div class="q">
+                What is the role of Cloudinary in your project — couldn't you
+                just store images in MongoDB?
+              </div>
+              <span class="chevron">▾</span>
+            </div>
+            <div class="a">
+              MongoDB is a document database optimised for structured data —
+              storing binary image files in it as Base64 strings would massively
+              bloat the database, slow down every query, and make the data hard
+              to back up. MongoDB has a 16MB document size limit which a single
+              high-res product image could approach. Cloudinary is purpose-built
+              for media — it stores images on a global CDN, automatically
+              compresses and optimises them, and serves them from the edge node
+              nearest to the user. It also provides free image transformations:
+              you can request a 200x200 thumbnail of a 4K image by changing the
+              URL parameters, without storing multiple versions. In our
+              architecture, we upload the image file to Cloudinary and store
+              only the returned URL string in MongoDB — giving us the best of
+              both worlds.
+            </div>
+          </div>
+
+          <div class="qa-card" onclick="toggleQA(this)">
+            <div
+              style="
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-start;
+                gap: 1rem;
+              "
+            >
+              <div class="q">
+                How does your admin dashboard prevent unauthorised access?
+              </div>
+              <span class="chevron">▾</span>
+            </div>
+            <div class="a">
+              Access is protected at two independent layers. On the frontend:
+              the AdminRoute component checks the AuthContext for a user with
+              isAdmin: true before rendering any admin page — non-admins are
+              redirected to the homepage. However, frontend checks alone are
+              never enough security. On the backend: every single admin API
+              endpoint (/api/admin/*) runs through two middleware functions in
+              sequence — first "protect" which verifies the JWT token and loads
+              the user from the database, then "admin" which checks user.isAdmin
+              === true. Even if someone bypassed the frontend check (by directly
+              calling our API with curl or Postman), the server would still
+              return a 403 Forbidden response. This double-layer approach —
+              client guard plus server guard — is the industry standard for RBAC
+              (Role-Based Access Control).
+            </div>
+          </div>
+        </div>
+
+        <!-- Final call to action -->
+        <div
+          class="reveal reveal-delay-4"
+          style="
+            margin-top: 3rem;
+            text-align: center;
+            padding: 2.5rem;
+            background: rgba(216, 125, 74, 0.08);
+            border: 1px solid rgba(216, 125, 74, 0.2);
+            border-radius: 20px;
+          "
+        >
+          <p style="font-size: 2rem; margin-bottom: 0.5rem">🎧</p>
+          <h3
+            style="
+              font-size: 1.4rem;
+              font-weight: 900;
+              color: #d87d4a;
+              margin-bottom: 0.5rem;
+            "
+          >
+            Audiophile Nigeria
+          </h3>
+          <p
+            style="
+              font-size: 0.9rem;
+              color: rgba(249, 246, 241, 0.6);
+              max-width: 480px;
+              margin: 0 auto;
+              line-height: 1.7;
+            "
+          >
+            Built with industry-standard tools. Designed for the Nigerian
+            market. Ready for production.
+          </p>
+          <p
+            style="
+              margin-top: 1.5rem;
+              font-size: 0.78rem;
+              font-weight: 700;
+              letter-spacing: 0.15em;
+              text-transform: uppercase;
+              color: rgba(249, 246, 241, 0.3);
+            "
+          >
+            Thank you — we welcome your questions
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════
+     JAVASCRIPT
+════════════════════════════════════ -->
+    <script>
+      // ── Slide titles for nav dots
+      const slides = document.querySelectorAll(".slide");
+      const slideTitles = [
+        "Title",
+        "Problem",
+        "Market",
+        "Solution",
+        "Tech Stack",
+        "Access Levels",
+        "Business Case",
+        "Challenges",
+        "Q&A",
+      ];
+      const counter = document.getElementById("slide-counter");
+      const navDots = document.getElementById("nav-dots");
+
+      // Build nav dots
+      slides.forEach((_, i) => {
+        const btn = document.createElement("button");
+        btn.className = "nav-dot" + (i === 0 ? " active" : "");
+        btn.title = slideTitles[i] || `Slide ${i + 1}`;
+        btn.setAttribute("aria-label", slideTitles[i] || `Slide ${i + 1}`);
+        btn.addEventListener("click", () => {
+          slides[i].scrollIntoView({ behavior: "smooth" });
+        });
+        navDots.appendChild(btn);
+      });
+
+      // ── Intersection observer for slide counter + dot activation
+      const slideObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const idx = Array.from(slides).indexOf(entry.target);
+              // Update counter
+              counter.textContent =
+                String(idx + 1).padStart(2, "0") +
+                " / " +
+                String(slides.length).padStart(2, "0");
+              // Update dots
+              document.querySelectorAll(".nav-dot").forEach((d, di) => {
+                d.classList.toggle("active", di === idx);
+              });
+            }
+          });
+        },
+        { threshold: 0.5 },
+      );
+
+      slides.forEach((s) => slideObserver.observe(s));
+
+      // ── Intersection observer for reveal animations
+      const revealEls = document.querySelectorAll(".reveal");
+      const revealObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+            }
+          });
+        },
+        { threshold: 0.12, rootMargin: "0px 0px -40px 0px" },
+      );
+
+      revealEls.forEach((el) => revealObserver.observe(el));
+
+      // ── Q&A accordion
+      function toggleQA(card) {
+        const wasOpen = card.classList.contains("open");
+        // Close all
+        document
+          .querySelectorAll(".qa-card")
+          .forEach((c) => c.classList.remove("open"));
+        // Open this one if it wasn't already
+        if (!wasOpen) card.classList.add("open");
+      }
+
+      // ── Keyboard navigation
+      document.addEventListener("keydown", (e) => {
+        const currentSlide = Array.from(slides).findIndex((s) => {
+          const rect = s.getBoundingClientRect();
+          return rect.top >= -10 && rect.top < window.innerHeight / 2;
+        });
+        if (e.key === "ArrowDown" || e.key === "ArrowRight") {
+          const next = slides[Math.min(currentSlide + 1, slides.length - 1)];
+          if (next) next.scrollIntoView({ behavior: "smooth" });
+        }
+        if (e.key === "ArrowUp" || e.key === "ArrowLeft") {
+          const prev = slides[Math.max(currentSlide - 1, 0)];
+          if (prev) prev.scrollIntoView({ behavior: "smooth" });
+        }
+      });
+    </script>
+  </body>
+</html>
