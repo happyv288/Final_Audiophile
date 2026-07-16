@@ -33,6 +33,10 @@ const productSchema = new Schema(
       type: String,
       required: [true, "Product image is required"],
     },
+    description: {
+      type: String,
+      required: [true, "Product description is required"],
+    },
     features: {
       type: String,
       required: [true, "product features are required"],

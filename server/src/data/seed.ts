@@ -22,9 +22,9 @@ dns.setServers(["8.8.8.8", "8.8.4.4"]);
 // This is the initial set of 6 products API on the website
 const products = [
   {
-    name: "XX99 Mark II",
+    name: "XX99 Mark II Headphone",
     category: "headphones" as const,
-    price: 389800,
+    price: 389700,
     image:
       "https://res.cloudinary.com/dsdoteykz/image/upload/v1781691842/xx99_product001_clrldl.png",
     description:
@@ -49,7 +49,7 @@ const products = [
   },
 
   {
-    name: "XX99 Mark I",
+    name: "XX99 Mark I Headphone",
     category: "headphones" as const,
     price: 2275000,
     image:
@@ -101,7 +101,7 @@ const products = [
   },
 
   {
-    name: "ZX9 SPEAKER",
+    name: "ZX9   SPEAKER",
     category: "speakers" as const,
     price: 5850000,
     image:
@@ -128,7 +128,7 @@ const products = [
   },
 
   {
-    name: "ZX7 SPEAKER",
+    name: "ZX7      SPEAKER",
     category: "speakers" as const,
     price: 4744670,
     image:
@@ -155,7 +155,7 @@ const products = [
   },
 
   {
-    name: "YX1 WIRELESS EARPHONES",
+    name: "YX1 WIRELESS    EARPHONES",
     category: "earphones" as const,
     price: 812016,
     image:

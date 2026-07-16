@@ -65,6 +65,7 @@ export const createOrder = async (
         eMoneyPIN: customerInfo.eMoneyPIN || "",
       },
       cartItems: cartItems.map((item: any) => ({
+
         // create a valid objectId for the productId
         productId: mongoose.Types.ObjectId.isValid(item._id)
           ? new mongoose.Types.ObjectId(item._id)

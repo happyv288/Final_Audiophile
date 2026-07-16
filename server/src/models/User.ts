@@ -1,5 +1,5 @@
 // Defines the user data stucture in MongoDB using mongoose.
-// A "model" is like a blueprint for every user document that will be staoredin the database
+// A "model" is like a blueprint for every user document that will be staored in the database
 
 import mongoose, { Schema } from "mongoose";
 import { IUser } from "../types/indexServer";
@@ -37,7 +37,7 @@ const userSchema = new Schema<IUser>(
       default: false, // New users are not admins by default
     },
 
-    // Optional pfrofile avatar stored as a cloudinary URL
+    // Optional profile avatar stored as a cloudinary URL
     avatar: {
       type: String,
       default: "",
